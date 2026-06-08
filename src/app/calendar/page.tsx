@@ -85,7 +85,7 @@ export default function CalendarPage() {
       {/* Title Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight flex items-center gap-2">
+          <h1 className="text-3xl sm:text-4xl font-extrabold text-text-main tracking-tight flex items-center gap-2">
             <CalendarDays className="text-brand-gold" /> Full Match Calendar
           </h1>
           <p className="text-text-muted mt-1.5 text-sm">
@@ -114,7 +114,7 @@ export default function CalendarPage() {
             placeholder="Search teams or venues..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-3 py-2 rounded-lg bg-black/20 border border-border-card text-text-main focus:outline-none focus:border-brand-gold text-sm font-semibold placeholder:text-text-dark"
+            className="w-full pl-10 pr-3 py-2 rounded-lg bg-bg-hover border border-border-card text-text-main focus:outline-none focus:border-brand-gold text-sm font-semibold placeholder:text-text-dark"
           />
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-dark" size={16} />
         </div>
@@ -126,7 +126,7 @@ export default function CalendarPage() {
             id="calendar-date-select"
             value={selectedDate}
             onChange={(e) => setSelectedDate(e.target.value)}
-            className="w-full pl-3 pr-8 py-2 rounded-lg bg-black/20 border border-border-card text-text-main focus:outline-none focus:border-brand-gold text-sm font-semibold cursor-pointer"
+            className="w-full pl-3 pr-8 py-2 rounded-lg bg-bg-hover border border-border-card text-text-main focus:outline-none focus:border-brand-gold text-sm font-semibold cursor-pointer"
           >
             <option value="">All Dates</option>
             {uniqueDates.map(date => (
@@ -144,7 +144,7 @@ export default function CalendarPage() {
             id="calendar-group-select"
             value={selectedGroup}
             onChange={(e) => setSelectedGroup(e.target.value)}
-            className="w-full pl-3 pr-8 py-2 rounded-lg bg-black/20 border border-border-card text-text-main focus:outline-none focus:border-brand-gold text-sm font-semibold cursor-pointer"
+            className="w-full pl-3 pr-8 py-2 rounded-lg bg-bg-hover border border-border-card text-text-main focus:outline-none focus:border-brand-gold text-sm font-semibold cursor-pointer"
           >
             <option value="">All Groups</option>
             {GROUP_LETTERS.map(letter => (
@@ -161,7 +161,7 @@ export default function CalendarPage() {
             id="calendar-stage-select"
             value={selectedStage}
             onChange={(e) => setSelectedStage(e.target.value)}
-            className="w-full pl-3 pr-8 py-2 rounded-lg bg-black/20 border border-border-card text-text-main focus:outline-none focus:border-brand-gold text-sm font-semibold cursor-pointer"
+            className="w-full pl-3 pr-8 py-2 rounded-lg bg-bg-hover border border-border-card text-text-main focus:outline-none focus:border-brand-gold text-sm font-semibold cursor-pointer"
           >
             <option value="">All Stages</option>
             {stages.map(stage => (
@@ -177,7 +177,7 @@ export default function CalendarPage() {
       ) : sortedDates.length === 0 ? (
         <div className="text-center py-16 rounded-2xl glass-card border border-border-card">
           <span className="text-4xl">🔍</span>
-          <h3 className="text-lg font-bold text-white mt-3">No Matches Found</h3>
+          <h3 className="text-lg font-bold text-text-main mt-3">No Matches Found</h3>
           <p className="text-text-muted mt-1 text-sm max-w-xs mx-auto">
             Try adjusting your search queries or clearing active filters.
           </p>
@@ -196,12 +196,12 @@ export default function CalendarPage() {
 
             return (
               <div key={date} className="space-y-4">
-                <div className="flex items-center gap-3 border-b border-white/5 pb-2">
+                <div className="flex items-center gap-3 border-b border-border-card pb-2">
                   <div className="h-2.5 w-2.5 rounded-full bg-brand-gold"></div>
-                  <h2 className="text-lg font-extrabold text-white tracking-wide">
+                  <h2 className="text-lg font-extrabold text-text-main tracking-wide">
                     {dateHeader}
                   </h2>
-                  <span className="text-xs font-bold text-text-muted px-2 py-0.5 rounded bg-white/5 border border-white/5">
+                  <span className="text-xs font-bold text-text-muted px-2 py-0.5 rounded bg-bg-hover border border-border-card">
                     {dateMatches.length} {dateMatches.length === 1 ? 'match' : 'matches'}
                   </span>
                 </div>

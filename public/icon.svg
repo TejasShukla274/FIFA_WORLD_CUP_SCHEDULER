@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="128" fill="#05070c" />
+  <!-- Golden Trophy cup -->
+  <path d="M256 80c-60 0-80 40-80 40h160s-20-40-80-40zm-90 60h180v80c0 50-40 90-90 90s-90-40-90-90v-80zm20 30c-20 0-35-15-35-35s15-35 35-35h10v70zm130 0v-70h10c20 0 35 15 35 35s-15 35-35 35h-10zm-75 140v80h-30v20h90v-20h-30v-80h-30zm-45 110v30h150v-30H196z" fill="#d4af37" />
+  <circle cx="256" cy="256" r="236" stroke="#d4af37" stroke-width="8" fill="none" opacity="0.2" />
+</svg>

@@ -95,7 +95,7 @@ export default function Home() {
                   <span className="text-4xl select-none">
                     {TEAMS.find(t => t.id === nextMatch.team1)?.flag || '🏳️'}
                   </span>
-                  <span className="text-xl sm:text-2xl font-black text-white">
+                  <span className="text-xl sm:text-2xl font-black text-text-main">
                     {TEAMS.find(t => t.id === nextMatch.team1)?.name || nextMatch.team1}
                   </span>
                 </div>
@@ -104,7 +104,7 @@ export default function Home() {
                   <span className="text-4xl select-none">
                     {TEAMS.find(t => t.id === nextMatch.team2)?.flag || '🏳️'}
                   </span>
-                  <span className="text-xl sm:text-2xl font-black text-white">
+                  <span className="text-xl sm:text-2xl font-black text-text-main">
                     {TEAMS.find(t => t.id === nextMatch.team2)?.name || nextMatch.team2}
                   </span>
                 </div>
@@ -114,7 +114,7 @@ export default function Home() {
               <div className="flex flex-wrap items-center gap-4 text-sm text-text-muted">
                 <div className="flex items-center gap-1.5">
                   <Clock size={16} className="text-brand-gold/80" />
-                  <span className="font-bold text-white">{nextMatch.time_ist} IST ({new Date(nextMatch.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})</span>
+                  <span className="font-bold text-text-main">{nextMatch.time_ist} IST ({new Date(nextMatch.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })})</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <MapPin size={16} className="text-text-dark" />
@@ -124,7 +124,7 @@ export default function Home() {
             </div>
 
             {/* Countdown Box */}
-            <div className="flex flex-col items-start md:items-center justify-center p-5 rounded-2xl bg-white/5 border border-white/5 min-w-[240px]">
+            <div className="flex flex-col items-start md:items-center justify-center p-5 rounded-2xl bg-bg-hover border border-border-card min-w-[240px]">
               <span className="text-[10px] font-black text-text-muted uppercase tracking-wider mb-2">KICKOFF COUNTDOWN</span>
               <Countdown targetDateStr={`${nextMatch.date}T${nextMatch.time_ist}:00+05:30`} />
               <Link 
@@ -160,7 +160,7 @@ export default function Home() {
               <Link
                 key={team.id}
                 href={`/search?team=${team.name}`}
-                className="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 text-sm transition-colors text-white font-bold group"
+                className="flex items-center justify-between p-3 rounded-lg hover:bg-bg-hover text-sm transition-colors text-text-main font-bold group"
               >
                 <div className="flex items-center gap-2.5">
                   <span className="text-xl">{team.flag}</span>
@@ -176,7 +176,7 @@ export default function Home() {
       {/* Featured Match Section */}
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <h2 className="text-2xl font-black tracking-tight text-white flex items-center gap-2">
+          <h2 className="text-2xl font-black tracking-tight text-text-main flex items-center gap-2">
             <span>📅</span>
             {todaysMatches.length > 0 ? "Today's Matches" : "Opening Day Fixtures (June 11)"}
           </h2>
@@ -199,7 +199,7 @@ export default function Home() {
       {/* Other Upcoming matches */}
       {otherUpcoming.length > 0 && !loading && (
         <div className="space-y-4">
-          <h3 className="text-xl font-bold text-white flex items-center gap-2">
+          <h3 className="text-xl font-bold text-text-main flex items-center gap-2">
             <span>⏱️</span> Upcoming Fixtures
           </h3>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">

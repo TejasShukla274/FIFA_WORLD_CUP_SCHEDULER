@@ -3,6 +3,7 @@ import './globals.css';
 import Navbar from '../components/Navbar';
 import { ThemeProvider } from '../components/ThemeContext';
 import { FavoritesProvider } from '../components/FavoritesContext';
+import { ToastProvider } from '../components/Toast';
 
 export const metadata: Metadata = {
   title: 'FIFA World Cup 2026 Planner & Schedule',
@@ -19,21 +20,46 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var savedTheme = localStorage.getItem('theme');
+                  var theme = savedTheme;
+                  if (!theme) {
+                    theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  }
+                  document.documentElement.classList.add(theme);
+                  if (theme === 'light') {
+                    document.documentElement.classList.remove('dark');
+                  } else {
+                    document.documentElement.classList.remove('light');
+                  }
+                } catch (e) {}
+              })()
+            `,
+          }}
+        />
+      </head>
       <body className="flex flex-col min-h-screen">
         <ThemeProvider>
-          <FavoritesProvider>
-            <Navbar />
-            <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
-              {children}
-            </main>
-            <footer className="border-t border-border-card bg-bg-main py-6 text-center text-xs text-text-dark">
-              <div className="max-w-7xl mx-auto px-4">
-                <p>&copy; {new Date().getFullYear()} FIFA World Cup 2026 Planner. All kickoff times are shown in Indian Standard Time (IST).</p>
-                <p className="mt-1.5 text-text-dark/60 text-[10px]">This is an independent planner and is not affiliated with or endorsed by FIFA.</p>
-              </div>
-            </footer>
-          </FavoritesProvider>
+          <ToastProvider>
+            <FavoritesProvider>
+              <Navbar />
+              <main className="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                {children}
+              </main>
+              <footer className="border-t border-border-card bg-bg-main py-6 text-center text-xs text-text-dark">
+                <div className="max-w-7xl mx-auto px-4">
+                  <p>&copy; {new Date().getFullYear()} FIFA World Cup 2026 Planner. All kickoff times are shown in Indian Standard Time (IST).</p>
+                  <p className="mt-1.5 text-text-dark/60 text-[10px]">This is an independent planner and is not affiliated with or endorsed by FIFA.</p>
+                </div>
+              </footer>
+            </FavoritesProvider>
+          </ToastProvider>
         </ThemeProvider>
       </body>
     </html>

@@ -7,6 +7,7 @@
   --color-bg-main: #05070c;
   --color-bg-card: rgba(13, 18, 30, 0.7);
   --color-bg-card-hover: rgba(22, 28, 45, 0.85);
+  --color-bg-hover: rgba(255, 255, 255, 0.05);
   
   --color-brand-gold: #d4af37;
   --color-brand-gold-hover: #f3cf55;
@@ -31,11 +32,12 @@
   --color-bg-main: #f3f4f6;
   --color-bg-card: rgba(255, 255, 255, 0.85);
   --color-bg-card-hover: rgba(255, 255, 255, 0.98);
+  --color-bg-hover: rgba(0, 0, 0, 0.05);
   --color-border-card: rgba(0, 0, 0, 0.08);
   --color-border-gold: rgba(212, 175, 55, 0.4);
   --color-text-main: #111827;
-  --color-text-muted: #4b5563;
-  --color-text-dark: #9ca3af;
+  --color-text-muted: #374151; /* Enhanced for light mode contrast */
+  --color-text-dark: #4b5563;  /* Enhanced for light mode contrast */
 }
 
 html,

@@ -114,7 +114,7 @@ export default function GroupsPage() {
     <div className="space-y-8">
       {/* Title */}
       <div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight flex items-center gap-2">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-text-main tracking-tight flex items-center gap-2">
           <Users className="text-brand-gold" /> Tournament Groups
         </h1>
         <p className="text-text-muted mt-1 text-sm">
@@ -136,8 +136,8 @@ export default function GroupsPage() {
             return (
               <div key={letter} className="glass-card overflow-hidden p-5 border border-border-card flex flex-col justify-between">
                 <div>
-                  <div className="flex items-center justify-between border-b border-white/5 pb-3 mb-4">
-                    <h2 className="text-lg font-black text-white">Group {letter}</h2>
+                  <div className="flex items-center justify-between border-b border-border-card pb-3 mb-4">
+                    <h2 className="text-lg font-black text-text-main">Group {letter}</h2>
                     <Link
                       href={`/calendar?group=${letter}`}
                       className="text-[10px] font-extrabold uppercase text-brand-gold hover:text-brand-gold-hover transition-colors"
@@ -149,20 +149,25 @@ export default function GroupsPage() {
                   {/* Standing Table */}
                   <table className="w-full text-left text-xs">
                     <thead>
-                      <tr className="text-text-dark font-black uppercase tracking-wider border-b border-white/5 pb-2">
+                      <tr className="text-text-dark font-black uppercase tracking-wider border-b border-border-card pb-2">
                         <th className="pb-2 w-[45%]">Team</th>
                         <th className="pb-2 text-center">P</th>
                         <th className="pb-2 text-center">GD</th>
                         <th className="pb-2 text-center text-brand-gold">Pts</th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-white/5">
+                    <tbody className="divide-y divide-border-card">
                       {standings.map((row, idx) => (
-                        <tr key={row.team.id} className="hover:bg-white/5 transition-colors">
-                          <td className="py-2.5 font-bold flex items-center gap-2 text-white">
+                        <tr key={row.team.id} className="hover:bg-bg-hover transition-colors">
+                          <td className="py-2.5 font-bold flex items-center gap-2 text-text-main">
                             <span className="text-text-muted font-bold text-[10px] w-3">{idx + 1}</span>
-                            <span className="text-lg leading-none select-none">{row.team.flag}</span>
-                            <span className="truncate max-w-[100px]">{row.team.name}</span>
+                            <Link 
+                              href={`/teams/${row.team.id}`}
+                              className="flex items-center gap-2 hover:text-brand-gold hover:underline cursor-pointer truncate max-w-[150px]"
+                            >
+                              <span className="text-lg leading-none select-none">{row.team.flag}</span>
+                              <span>{row.team.name}</span>
+                            </Link>
                           </td>
                           <td className="py-2.5 text-center text-text-muted font-bold">{row.played}</td>
                           <td className={`py-2.5 text-center font-bold ${row.gd > 0 ? 'text-brand-green' : row.gd < 0 ? 'text-brand-crimson' : 'text-text-muted'}`}>
@@ -175,7 +180,7 @@ export default function GroupsPage() {
                   </table>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-white/5 flex items-center gap-2 text-[10px] text-text-muted">
+                <div className="mt-4 pt-3 border-t border-border-card flex items-center gap-2 text-[10px] text-text-muted">
                   <Info size={12} className="text-brand-gold" />
                   <span>Rank 1-2 advance. Matches simulated dynamically.</span>
                 </div>

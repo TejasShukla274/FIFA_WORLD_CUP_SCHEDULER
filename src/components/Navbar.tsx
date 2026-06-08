@@ -49,7 +49,7 @@ export default function Navbar() {
                   className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold transition-all ${
                     active
                       ? 'bg-brand-gold/10 text-brand-gold border border-brand-gold/20'
-                      : 'text-text-muted hover:text-text-main hover:bg-white/5'
+                      : 'text-text-muted hover:text-text-main hover:bg-bg-hover'
                   }`}
                 >
                   <Icon size={16} />
@@ -66,7 +66,7 @@ export default function Navbar() {
             <ThemeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-lg text-text-muted hover:text-text-main hover:bg-white/5 cursor-pointer interactive-scale"
+              className="p-2 rounded-lg text-text-muted hover:text-text-main hover:bg-bg-hover cursor-pointer interactive-scale"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -89,7 +89,7 @@ export default function Navbar() {
                   className={`flex items-center gap-3 px-4 py-3 rounded-xl text-base font-semibold transition-all ${
                     active
                       ? 'bg-brand-gold/10 text-brand-gold border-l-4 border-brand-gold'
-                      : 'text-text-muted hover:text-text-main hover:bg-white/5'
+                      : 'text-text-muted hover:text-text-main hover:bg-bg-hover'
                   }`}
                 >
                   <Icon size={20} />

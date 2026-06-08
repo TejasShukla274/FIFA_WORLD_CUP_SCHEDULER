@@ -41,7 +41,7 @@ export default function FavoritesPage() {
     <div className="space-y-8">
       {/* Title */}
       <div>
-        <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight flex items-center gap-2">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-text-main tracking-tight flex items-center gap-2">
           <Star className="text-brand-gold animate-bounce" fill="currentColor" size={28} /> Favorited Matches
         </h1>
         <p className="text-text-muted mt-1 text-sm">
@@ -51,7 +51,7 @@ export default function FavoritesPage() {
 
       {/* List of favorited teams */}
       {favorites.length > 0 && (
-        <div className="flex flex-wrap gap-2 p-4 rounded-xl bg-white/5 border border-white/5 items-center">
+        <div className="flex flex-wrap gap-2 p-4 rounded-xl bg-bg-hover border border-border-card items-center">
           <span className="text-xs text-text-dark font-extrabold uppercase tracking-wider mr-2">FAVORITE TEAMS ({favorites.length}):</span>
           {favorites.map(id => {
             const team = TEAMS.find(t => t.id === id);
@@ -59,7 +59,7 @@ export default function FavoritesPage() {
             return (
               <Link
                 key={id}
-                href={`/search?team=${team.name}`}
+                href={`/teams/${team.id}`}
                 className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-gold/10 hover:bg-brand-gold/20 text-brand-gold text-xs font-bold border border-brand-gold/20 transition-all cursor-pointer"
               >
                 <span>{team.flag}</span>
@@ -76,7 +76,7 @@ export default function FavoritesPage() {
       ) : favorites.length === 0 ? (
         <div className="text-center py-16 rounded-2xl glass-card border border-border-card max-w-xl mx-auto space-y-6">
           <span className="text-5xl block select-none">⭐</span>
-          <h2 className="text-2xl font-black text-white">No Favorite Teams</h2>
+          <h2 className="text-2xl font-black text-text-main">No Favorite Teams</h2>
           <p className="text-text-muted text-sm max-w-md mx-auto">
             You haven&apos;t added any teams to your favorites yet. Click the star icon on any match card, or select a team on the search page and click favorite.
           </p>
@@ -89,14 +89,14 @@ export default function FavoritesPage() {
             </Link>
             <Link
               href="/search"
-              className="px-5 py-2.5 rounded-xl bg-white/5 border border-white/5 text-white hover:text-brand-gold text-xs font-black uppercase tracking-wider transition-colors cursor-pointer interactive-scale"
+              className="px-5 py-2.5 rounded-xl bg-bg-hover border border-border-card text-text-main hover:text-brand-gold text-xs font-black uppercase tracking-wider transition-colors cursor-pointer interactive-scale"
             >
               Search Teams
             </Link>
           </div>
         </div>
       ) : favoriteMatches.length === 0 ? (
-        <div className="text-center py-12 rounded-xl bg-white/5 border border-white/5">
+        <div className="text-center py-12 rounded-xl bg-bg-hover border border-border-card">
           <CircleAlert className="mx-auto text-text-dark mb-2" size={24} />
           <p className="text-text-muted text-sm font-semibold">No matches found for your favorited teams.</p>
         </div>
