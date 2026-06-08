@@ -1,0 +1,16 @@
+{
+  "name": "FIFA World Cup 2026 Planner",
+  "short_name": "FWC26 Planner",
+  "description": "Track all 104 matches of the FIFA World Cup 2026 in IST, manage favorite teams, and view schedules.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#05070c",
+  "theme_color": "#d4af37",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+}
