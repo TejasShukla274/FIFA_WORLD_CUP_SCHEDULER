@@ -5,8 +5,12 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { Trophy } from 'lucide-react';
 import AnimatedCounter from './AnimatedCounter';
+import { useTheme } from './ThemeContext';
 
 export default function Hero() {
+  const { theme } = useTheme();
+  const trophySrc = theme === 'dark' ? '/trophy-dark.png' : '/trophy-light.png';
+
   return (
     <div className="relative overflow-hidden rounded-2xl glass-card pitch-bg gold-glow py-10 px-6 sm:px-12 border border-brand-gold/15 shadow-gold-glow page-transition">
       <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
@@ -49,11 +53,11 @@ export default function Hero() {
         <div className="hidden md:flex items-center justify-center flex-shrink-0">
           <div className="animate-float">
             <Image
-              src="/trophy.png"
+              src={trophySrc}
               alt="FIFA World Cup 2026 Trophy"
               width={240}
               height={320}
-              className="drop-shadow-2xl select-none pointer-events-none"
+              className="drop-shadow-2xl select-none pointer-events-none rounded-2xl"
               priority
             />
           </div>
