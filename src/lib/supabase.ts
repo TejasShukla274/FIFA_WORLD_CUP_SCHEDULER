@@ -20,6 +20,7 @@ export const getMatches = async (): Promise<Match[]> => {
       .order('id');
     if (!error && data) {
       // Map database schema fields to frontend fields if they differ slightly
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       return data.map((d: any) => ({
         id: d.id,
         date: d.date,
@@ -66,7 +67,12 @@ export const updateMatchScore = async (
         is_completed: isCompleted
       })
       .eq('id', matchId);
-    if (!error) return true;
+    if (!error) {
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new Event('matches-updated'));
+      }
+      return true;
+    }
     console.error('Supabase update error:', error);
   }
 

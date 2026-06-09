@@ -1,64 +1,81 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Trophy } from 'lucide-react';
 import AnimatedCounter from './AnimatedCounter';
 
 export default function Hero() {
   return (
-    <div className="relative overflow-hidden rounded-2xl glass-card pitch-bg gold-glow py-12 px-6 sm:px-12 text-center border border-brand-gold/20 shadow-gold-glow mb-8">
-      <div className="relative z-10 max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-xs font-bold uppercase tracking-wider mb-6">
-          <Trophy size={14} /> June 11 – July 19, 2026
-        </div>
-        <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight mb-4 text-text-main leading-tight">
-          FIFA World Cup <span className="bg-gradient-to-r from-brand-gold via-brand-gold-hover to-brand-green bg-clip-text text-transparent">2026</span> Planner
-        </h1>
-        <p className="text-base sm:text-lg text-text-muted mb-8 max-w-2xl mx-auto">
-          Track the biggest World Cup in history. View schedules, manage your favorite teams, and follow all 104 matches across Canada, Mexico, and the United States in Indian Standard Time (IST).
-        </p>
-        
-        <div className="flex flex-wrap justify-center gap-4 mb-10">
-          <Link href="/calendar" className="px-6 py-3 rounded-xl bg-brand-gold hover:bg-brand-gold-hover text-bg-main font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer interactive-scale">
-            Explore Full Calendar
-          </Link>
-          <Link href="/search" className="px-6 py-3 rounded-xl glass-card text-text-main hover:text-brand-gold border border-border-card hover:border-brand-gold/30 font-bold transition-all transform hover:-translate-y-0.5 cursor-pointer interactive-scale">
-            Find Your Team
-          </Link>
+    <div className="relative overflow-hidden rounded-2xl glass-card pitch-bg gold-glow py-10 px-6 sm:px-12 border border-brand-gold/15 shadow-gold-glow page-transition">
+      <div className="relative z-10 flex flex-col md:flex-row md:items-center md:justify-between gap-8">
+        {/* Left column — Content */}
+        <div className="flex-1 max-w-xl space-y-5">
+          {/* Date badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/20 text-brand-gold text-xs font-bold uppercase tracking-wider">
+            <Trophy size={13} />
+            <span>June 11 – July 19, 2026</span>
+          </div>
+
+          {/* Title */}
+          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-text-main leading-[1.1]">
+            FIFA <span className="bg-gradient-to-r from-brand-gold via-brand-gold-hover to-brand-green bg-clip-text text-transparent">2026</span> Planner
+          </h1>
+
+          {/* Description */}
+          <p className="text-base text-text-muted leading-relaxed max-w-lg">
+            Track the biggest World Cup in history. View schedules, your favorite teams, and follow all 104 matches across Canada, and the United States in Indian Standard Time (IST).
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-wrap gap-3 pt-1">
+            <Link
+              href="/calendar"
+              className="px-6 py-3 rounded-xl bg-brand-green hover:bg-brand-green-hover text-white font-bold shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 cursor-pointer interactive-scale text-sm"
+            >
+              Explore Full Calendar
+            </Link>
+            <Link
+              href="/search"
+              className="px-6 py-3 rounded-xl glass-card text-text-main hover:text-brand-gold border border-border-card hover:border-brand-gold/30 font-bold transition-all transform hover:-translate-y-0.5 cursor-pointer interactive-scale text-sm"
+            >
+              Find Your Team
+            </Link>
+          </div>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-5 gap-4 pt-6 border-t border-border-card max-w-3xl mx-auto">
-          <div className="p-3">
-            <div className="text-2xl sm:text-3xl font-extrabold text-text-main">
-              <AnimatedCounter end={48} />
-            </div>
-            <div className="text-xs sm:text-sm font-semibold text-text-muted">Teams</div>
-          </div>
-          <div className="p-3">
-            <div className="text-2xl sm:text-3xl font-extrabold text-text-main">
-              <AnimatedCounter end={12} />
-            </div>
-            <div className="text-xs sm:text-sm font-semibold text-text-muted">Groups</div>
-          </div>
-          <div className="p-3">
-            <div className="text-2xl sm:text-3xl font-extrabold text-text-main">
-              <AnimatedCounter end={104} />
-            </div>
-            <div className="text-xs sm:text-sm font-semibold text-text-muted">Matches</div>
-          </div>
-          <div className="p-3">
-            <div className="text-2xl sm:text-3xl font-extrabold text-text-main">
-              <AnimatedCounter end={16} />
-            </div>
-            <div className="text-xs sm:text-sm font-semibold text-text-muted">Host Cities</div>
-          </div>
-          <div className="p-3">
-            <div className="text-2xl sm:text-3xl font-extrabold text-text-main">
-              <AnimatedCounter end={3} />
-            </div>
-            <div className="text-xs sm:text-sm font-semibold text-text-muted">Host Countries</div>
+        {/* Right column — Trophy image */}
+        <div className="hidden md:flex items-center justify-center flex-shrink-0">
+          <div className="animate-float">
+            <Image
+              src="/trophy.png"
+              alt="FIFA World Cup 2026 Trophy"
+              width={240}
+              height={320}
+              className="drop-shadow-2xl select-none pointer-events-none"
+              priority
+            />
           </div>
         </div>
+      </div>
+
+      {/* Stats Row */}
+      <div className="relative z-10 grid grid-cols-2 sm:grid-cols-5 gap-4 pt-8 mt-8 border-t border-border-card">
+        {[
+          { value: 48, label: 'Teams' },
+          { value: 12, label: 'Groups' },
+          { value: 104, label: 'Matches' },
+          { value: 16, label: 'Host Cities' },
+          { value: 3, label: 'Host Countries' },
+        ].map((stat, i) => (
+          <div key={stat.label} className={`text-center card-enter card-enter-${i + 1}`}>
+            <div className="text-2xl sm:text-3xl font-extrabold text-text-main">
+              <AnimatedCounter end={stat.value} />
+            </div>
+            <div className="text-xs sm:text-sm font-semibold text-text-muted mt-0.5">{stat.label}</div>
+          </div>
+        ))}
       </div>
     </div>
   );

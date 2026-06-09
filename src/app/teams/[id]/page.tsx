@@ -1,14 +1,14 @@
 'use client';
 
-import React, { useEffect, useState, use } from 'react';
-import { TEAMS, Team, Match, VENUES } from '../../../lib/data';
-import { getMatches } from '../../../lib/supabase';
+import React, { use } from 'react';
+import { TEAMS } from '../../../lib/data';
 import MatchCard from '../../../components/MatchCard';
 import { MatchGridSkeleton } from '../../../components/Skeletons';
 import { useFavorites } from '../../../components/FavoritesContext';
 import { useToast } from '../../../components/Toast';
 import { Star, Shield, Zap, CircleAlert, ArrowLeft, Users, Trophy } from 'lucide-react';
 import Link from 'next/link';
+import { useMatches } from '../../../components/MatchesContext';
 
 interface TeamDetailPageProps {
   params: Promise<{ id: string }>;
@@ -19,25 +19,10 @@ export default function TeamDetailPage({ params }: TeamDetailPageProps) {
   const teamId = resolvedParams.id;
 
   const team = TEAMS.find(t => t.id === teamId);
-  const [matches, setMatches] = useState<Match[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { matches, loading } = useMatches();
 
   const { isFavorite, toggleFavorite } = useFavorites();
   const { showToast } = useToast();
-
-  useEffect(() => {
-    async function loadData() {
-      try {
-        const data = await getMatches();
-        setMatches(data);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    loadData();
-  }, []);
 
   if (!team) {
     return (

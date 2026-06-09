@@ -27,19 +27,27 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     document.documentElement.classList.toggle('light', initialTheme === 'light');
     document.documentElement.classList.toggle('dark', initialTheme === 'dark');
 
-    // Register PWA service worker
+    // Register or unregister PWA service worker depending on development mode
     if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-      const registerSW = () => {
-        navigator.serviceWorker.register('/sw.js')
-          .then(reg => console.log('PWA ServiceWorker registered with scope: ', reg.scope))
-          .catch(err => console.error('PWA ServiceWorker registration failed: ', err));
-      };
-
-      if (document.readyState === 'complete') {
-        registerSW();
+      if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        navigator.serviceWorker.getRegistrations().then((registrations) => {
+          for (const registration of registrations) {
+            registration.unregister();
+          }
+        });
       } else {
-        window.addEventListener('load', registerSW);
-        return () => window.removeEventListener('load', registerSW);
+        const registerSW = () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then(reg => console.log('PWA ServiceWorker registered with scope: ', reg.scope))
+            .catch(err => console.error('PWA ServiceWorker registration failed: ', err));
+        };
+
+        if (document.readyState === 'complete') {
+          registerSW();
+        } else {
+          window.addEventListener('load', registerSW);
+          return () => window.removeEventListener('load', registerSW);
+        }
       }
     }
   }, []);

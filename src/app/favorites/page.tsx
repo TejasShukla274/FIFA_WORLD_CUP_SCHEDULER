@@ -1,36 +1,18 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { getMatches } from '../../lib/supabase';
-import { Match, TEAMS } from '../../lib/data';
+import React from 'react';
+import { TEAMS } from '../../lib/data';
 import MatchCard from '../../components/MatchCard';
 import { MatchGridSkeleton } from '../../components/Skeletons';
 import { useFavorites } from '../../components/FavoritesContext';
 import { Star, CircleAlert } from 'lucide-react';
 import Link from 'next/link';
+import { useMatches } from '../../components/MatchesContext';
 
 export default function FavoritesPage() {
-  const [matches, setMatches] = useState<Match[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { matches, loading } = useMatches();
   
   const { favorites } = useFavorites();
-
-  const loadData = async () => {
-    try {
-      const data = await getMatches();
-      setMatches(data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadData();
-    window.addEventListener('matches-updated', loadData);
-    return () => window.removeEventListener('matches-updated', loadData);
-  }, []);
 
   // Filter matches containing favorited teams
   const favoriteMatches = matches.filter(m => 

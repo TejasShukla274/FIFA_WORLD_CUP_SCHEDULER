@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { getMatches } from '../../lib/supabase';
-import { Match, GROUP_LETTERS, TEAMS, Team } from '../../lib/data';
+import React from 'react';
+import { GROUP_LETTERS, TEAMS, Team } from '../../lib/data';
 import { GroupCardSkeleton } from '../../components/Skeletons';
 import Link from 'next/link';
 import { Users, Info } from 'lucide-react';
+import { useMatches } from '../../components/MatchesContext';
 
 interface Standing {
   team: Team;
@@ -20,25 +20,7 @@ interface Standing {
 }
 
 export default function GroupsPage() {
-  const [matches, setMatches] = useState<Match[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  const loadData = async () => {
-    try {
-      const data = await getMatches();
-      setMatches(data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadData();
-    window.addEventListener('matches-updated', loadData);
-    return () => window.removeEventListener('matches-updated', loadData);
-  }, []);
+  const { matches, loading } = useMatches();
 
   // Standings calculator
   const calculateGroupStandings = (groupLetter: string): Standing[] => {
@@ -111,7 +93,7 @@ export default function GroupsPage() {
   };
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 page-transition">
       {/* Title */}
       <div>
         <h1 className="text-3xl sm:text-4xl font-extrabold text-text-main tracking-tight flex items-center gap-2">

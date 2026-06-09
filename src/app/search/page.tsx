@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
-import { getMatches } from '../../lib/supabase';
-import { Match, TEAMS, Team } from '../../lib/data';
+import { TEAMS, Team } from '../../lib/data';
 import MatchCard from '../../components/MatchCard';
 import { MatchGridSkeleton } from '../../components/Skeletons';
 import { useFavorites } from '../../components/FavoritesContext';
 import { Search, Star, Shield, Zap, CircleAlert } from 'lucide-react';
+import { useMatches } from '../../components/MatchesContext';
 
 function highlightText(text: string, search: string) {
   if (!search.trim()) return <span>{text}</span>;
@@ -32,27 +32,9 @@ function SearchPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   
-  const [matches, setMatches] = useState<Match[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { matches, loading } = useMatches();
   const [selectedTeam, setSelectedTeam] = useState<Team | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
-
-  const loadData = async () => {
-    try {
-      const data = await getMatches();
-      setMatches(data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadData();
-    window.addEventListener('matches-updated', loadData);
-    return () => window.removeEventListener('matches-updated', loadData);
-  }, []);
 
   // Update selected team based on query parameter
   useEffect(() => {

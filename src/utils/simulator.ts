@@ -31,8 +31,8 @@ export function simulateMatch(home: Team, away: Team): ScoreDetails {
 export function simulateKnockoutMatch(home: Team, away: Team): Omit<Match, 'id' | 'stage' | 'group'> {
   // Main 90 minutes
   const normalTime = simulateMatch(home, away);
-  let homeScore = normalTime.homeScore;
-  let awayScore = normalTime.awayScore;
+  const homeScore = normalTime.homeScore;
+  const awayScore = normalTime.awayScore;
   let winnerId = '';
   let extraTime: ScoreDetails | undefined;
   let penalties: ScoreDetails | undefined;

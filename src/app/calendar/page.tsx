@@ -1,36 +1,19 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import { getMatches } from '../../lib/supabase';
+import React, { useState } from 'react';
 import { Match, GROUP_LETTERS } from '../../lib/data';
 import MatchCard from '../../components/MatchCard';
-import { MatchGridSkeleton } from '../../components/Skeletons';
 import { Search, Filter, CalendarDays, X } from 'lucide-react';
+import { useMatches } from '../../components/MatchesContext';
+import SoccerBallLoader from '../../components/SoccerBallLoader';
+import { MatchGridSkeleton } from '../../components/Skeletons';
 
 export default function CalendarPage() {
-  const [matches, setMatches] = useState<Match[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { matches, loading } = useMatches();
   const [search, setSearch] = useState('');
   const [selectedGroup, setSelectedGroup] = useState('');
   const [selectedStage, setSelectedStage] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
-
-  const loadData = async () => {
-    try {
-      const data = await getMatches();
-      setMatches(data);
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadData();
-    window.addEventListener('matches-updated', loadData);
-    return () => window.removeEventListener('matches-updated', loadData);
-  }, []);
 
   // Unique match dates for date filter dropdown
   const uniqueDates = Array.from(new Set(matches.map(m => m.date))).sort();
@@ -81,7 +64,7 @@ export default function CalendarPage() {
   const hasActiveFilters = search !== '' || selectedGroup !== '' || selectedStage !== '' || selectedDate !== '';
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 page-transition">
       {/* Title Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
